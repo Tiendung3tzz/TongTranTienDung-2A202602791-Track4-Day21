@@ -1,0 +1,13 @@
+{
+  "cpu": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
+  "ram_gib": 7.7,
+  "gpu_used": false,
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.14",
+  "open3d": "0.19.0",
+  "numpy": "2.5.3",
+  "omp_threads": 1,
+  "warmups_per_config": 1,
+  "measured_repeats": 20,
+  "timed_stages": "finite/ROI, voxel, RANSAC, classification, DBSCAN, AABB; excludes IO/plots/GT"
+}
