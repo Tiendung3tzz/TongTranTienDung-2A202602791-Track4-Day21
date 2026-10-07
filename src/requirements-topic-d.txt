@@ -1,0 +1,6 @@
+# Installed/verified on CPython 3.12.14; base requirements.txt remains unchanged.
+numpy==2.5.3
+opencv-python==5.0.0.93
+matplotlib==3.11.2
+pandas==3.0.6
+open3d==0.19.0

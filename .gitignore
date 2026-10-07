@@ -4,6 +4,8 @@ instructor/
 __pycache__/
 *.pyc
 .venv/
+.cache/
+.build/
 venv/
 .ipynb_checkpoints/
 
