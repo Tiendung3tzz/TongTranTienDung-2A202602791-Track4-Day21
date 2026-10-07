@@ -51,7 +51,13 @@ Hai quét **độc lập**, mỗi quét 3 mức × 3 frame; quét eps cố đị
 
 ## 3. Failure case
 
-CP4: đang chuẩn bị ảnh và phân tích failure; chưa kết luận khi chưa có bằng chứng.
+![failure](../results/figures/fail_01_dbscan_merge_pedestrians.png)
+
+- **Trường hợp:** KITTI 000011, Pedestrian #0 và #1 ở 13.41/14.48 m trong camera; thí nghiệm riêng giữ voxel 0.15 m, RANSAC 0.1 m, seed 42, **min_points=5 ở cả hai cấu hình** (benchmark chính dùng 10).
+- **Quan sát:** eps=0.5 m: cụm trội C7 chứa 61 điểm của GT #0, C47 chứa 8 điểm của GT #1; eps=0.8 m: cùng C5 chứa 61 và 13 điểm. CSV: [failure_merge.csv](../results/failure_merge.csv); #1 chỉ có 19 điểm voxel trong box, nên các mảnh còn lại có thể là noise/cụm phụ.
+- **Nguyên nhân:** DBSCAN dùng kết nối mật độ; eps lớn nối chuỗi điểm giữa hai vật, không biết danh tính người. Ảnh dùng footprint GT nét xanh và AABB cụm nét đỏ; đây là lỗi tách instance, không chứng minh robot sẽ bỏ sót vùng có vật cản.
+- **Lớp debug:** **Preprocess**, tham số clustering; I/O đã verify, Geometry có kiểm tra bottom-center/rotation và projection; đây là một frame LiDAR nên không có giả thuyết lệch thời gian, không dùng checkpoint model.
+- **Cách phát hiện khi chạy thật:** theo dõi kích thước cụm, số điểm và biến động số cụm; box rộng/ngang >2 m hoặc số cụm giảm >40% trong hai frame là cờ cần kiểm tra, phải hiệu chỉnh trên log robot. Khi gán nhãn kiểm chứng, dùng nhiều GT chia sẻ cụm trội; không có GT thì cờ trên chỉ là heuristic, không đảm bảo phát hiện mọi lần gộp.
 
 ## 4. Khuyến nghị nếu triển khai thật
 
@@ -78,6 +84,7 @@ python -m starter.projection --data-root data/kitti_mini --frame 000011
 python -m starter.projection --data-root data/nuscenes_mini_subset --frame scene-0103_010
 python -m src.obstacle
 python -m src.experiment
+python -m src.failure
 ```
 
 **[B4] Tool dùng lại:** python -m src.obstacle --help, python -m src.experiment --help, python -m src.failure --help và python -m src.occupancy --help liệt kê tham số, đơn vị, mặc định; chạy không tham số tạo kết quả trên data/kitti_mini. Pipeline obstacle dành cho **trục KITTI**, không áp nguyên ROI lên nuScenes; nuScenes trong bài này chỉ kiểm tra projection. Slide đi kèm đã export; source src/build_slides.mjs dùng bundled @oai/artifact-tool trong Codex và đọc chính các CSV này.

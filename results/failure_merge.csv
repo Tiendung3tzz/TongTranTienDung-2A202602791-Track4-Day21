@@ -1,0 +1,5 @@
+frame,eps,object_index,class,distance_cam_m,n_gt_voxel,n_gt_retained,n_gt_clustered,dominant_cluster,dominant_points
+000011,0.5,0,Pedestrian,13.41118935814419,66,61,61,7,61
+000011,0.5,1,Pedestrian,14.482447997489928,19,13,13,47,8
+000011,0.8,0,Pedestrian,13.41118935814419,66,61,61,5,61
+000011,0.8,1,Pedestrian,14.482447997489928,19,13,13,5,13

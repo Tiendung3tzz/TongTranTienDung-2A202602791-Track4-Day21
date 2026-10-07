@@ -1,0 +1,77 @@
+{
+  "frame": "000011",
+  "object_indices": [
+    0,
+    1
+  ],
+  "baseline": {
+    "voxel_size": 0.15,
+    "distance_threshold": 0.1,
+    "eps": 0.5,
+    "min_points": 5,
+    "seed": 42,
+    "max_forward": 40.0,
+    "half_width": 15.0
+  },
+  "failure": {
+    "voxel_size": 0.15,
+    "distance_threshold": 0.1,
+    "eps": 0.8,
+    "min_points": 5,
+    "seed": 42,
+    "max_forward": 40.0,
+    "half_width": 15.0
+  },
+  "support": [
+    {
+      "frame": "000011",
+      "eps": 0.5,
+      "object_index": 0,
+      "class": "Pedestrian",
+      "distance_cam_m": 13.41118935814419,
+      "n_gt_voxel": 66,
+      "n_gt_retained": 61,
+      "n_gt_clustered": 61,
+      "dominant_cluster": 7,
+      "dominant_points": 61
+    },
+    {
+      "frame": "000011",
+      "eps": 0.5,
+      "object_index": 1,
+      "class": "Pedestrian",
+      "distance_cam_m": 14.482447997489928,
+      "n_gt_voxel": 19,
+      "n_gt_retained": 13,
+      "n_gt_clustered": 13,
+      "dominant_cluster": 47,
+      "dominant_points": 8
+    },
+    {
+      "frame": "000011",
+      "eps": 0.8,
+      "object_index": 0,
+      "class": "Pedestrian",
+      "distance_cam_m": 13.41118935814419,
+      "n_gt_voxel": 66,
+      "n_gt_retained": 61,
+      "n_gt_clustered": 61,
+      "dominant_cluster": 5,
+      "dominant_points": 61
+    },
+    {
+      "frame": "000011",
+      "eps": 0.8,
+      "object_index": 1,
+      "class": "Pedestrian",
+      "distance_cam_m": 14.482447997489928,
+      "n_gt_voxel": 19,
+      "n_gt_retained": 13,
+      "n_gt_clustered": 13,
+      "dominant_cluster": 5,
+      "dominant_points": 13
+    }
+  ],
+  "debug_layer": "Preprocess",
+  "figure": "results/figures/fail_01_dbscan_merge_pedestrians.png"
+}
