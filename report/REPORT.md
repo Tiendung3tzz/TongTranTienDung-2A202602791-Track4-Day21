@@ -1,14 +1,14 @@
-# Báo cáo Day 6: [ĐIỀN tên đề tài ngắn]
+# Báo cáo Day 6: Độ nhạy của pipeline phát hiện vật cản
 
-> Thay **mọi** ô có chữ ĐIỀN nằm trong ngoặc vuông bằng nội dung của bạn, xoá luôn cả dấu ngoặc vuông. Lệnh `python tools/check_submission.py` sẽ báo FAIL nếu còn sót bất kỳ chỗ nào.
+> CP1: claim nháp; kết luận sẽ được cập nhật bằng số liệu chạy thật.
 
 - **Họ tên:** Tống Trần Tiến Dũng
 - **MSSV:** 2A202602791
 - **Lớp:** AI20K-T4
-- **Link repo:** https://github.com/Tiendung3tzz/TongTranTienDung-2A202602791-Track4-Day21
-- **Topic:** [ĐIỀN một chữ cái A/B/C/D/E/F] — [ĐIỀN tên topic]
-- **Dataset:** [ĐIỀN một hoặc nhiều trong: data/synthetic, data/kitti_mini, data/nuscenes_mini_subset, log riêng]
-- **Các frame đã dùng:** [ĐIỀN danh sách frame id, ví dụ 000011, 000049 hoặc scene-0103_010]
+- **Link repo:** https://github.com/Tiendung3tzz/TongTranTienDung-02791-Track4-Day21
+- **Topic:** D — Robot/drone obstacle
+- **Dataset:** data/kitti_mini (chính), data/synthetic và data/nuscenes_mini_subset (kiểm tra projection)
+- **Các frame đã dùng:** KITTI 000008, 000011, 000049; synthetic 000000; nuScenes scene-0103_010
 
 > Hãy viết ngắn: mỗi mục từ 3 đến 8 dòng, ưu tiên số liệu và hình ảnh.
 
@@ -16,7 +16,7 @@
 
 Một câu khẳng định kỹ thuật có thể kiểm chứng. Ví dụ: *"Lệch yaw 1° làm 12% điểm LiDAR rơi ra khỏi vật thể ở 30 m, phát hiện được bằng edge-alignment score với ngưỡng X."*
 
-[ĐIỀN]
+Claim nháp: Tăng DBSCAN eps từ 0.3 m lên 0.8 m, giữ voxel 0.15 m, ngưỡng RANSAC 0.1 m và min_points 10, làm số cụm giảm ít nhất 20% trên ít nhất 2/3 frame KITTI 000008, 000011, 000049. Nếu số liệu bác bỏ giả thuyết, sẽ ghi rõ kết luận thực tế.
 
 ## 2. Evidence
 
