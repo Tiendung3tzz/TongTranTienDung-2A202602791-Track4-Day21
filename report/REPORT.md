@@ -48,6 +48,7 @@ Hai quét **độc lập**, mỗi quét 3 mức × 3 frame; quét eps cố đị
 
 Ảnh trước/sau đủ 4 bước có cho [000008](../results/figures/obstacle_demo_000008.png), [000011](../results/figures/obstacle_demo_000011.png), [000049](../results/figures/obstacle_demo_000049.png). Ngưỡng RANSAC 0.05→0.30 m làm giảm số điểm giữ lại, nhưng số cụm 000008 tăng 32→39: xoá các điểm nối có thể tách một cụm lớn thành nhiều mảnh, nên không giả định số cụm luôn giảm theo ngưỡng đất.
 **[B3] Latency:** [obstacle_latency.csv](../results/obstacle_latency.csv) có 360 lượt đo, bỏ 1 warm-up/cấu hình rồi đo 20 lượt bằng perf_counter; p50/p95 của từng cấu hình trong hai bảng. Đo đủ pipeline số học, loại IO/import/plot/GT khỏi khoảng đo. CPU 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz, RAM 7.7 GiB, Windows, CPython 3.12.14, Open3D 0.19.0, OMP=1, không GPU; [hardware.json](../results/hardware.json). Mọi lượt có plane và label giống warm-up; thời gian thay đổi theo tải máy, hai quét có baseline trùng cấu hình nhưng timing không nhất thiết bằng nhau.
+**Advanced:** [occupancy BEV](../results/figures/occupancy_000011.png) dùng ô 0.25 m, giữ cả điểm DBSCAN noise: ô có điểm là occupied, ô vắng điểm là unknown, không suy diễn free-space. [Slide CP6](slides/TOPIC_D.pptx) có ghi chú trình bày 3 phút.
 
 ## 3. Failure case
 
@@ -85,9 +86,21 @@ python -m starter.projection --data-root data/nuscenes_mini_subset --frame scene
 python -m src.obstacle
 python -m src.experiment
 python -m src.failure
+python -m src.occupancy
+python -m src.build_report
+python tools/check_submission.py
 ```
 
 **[B4] Tool dùng lại:** python -m src.obstacle --help, python -m src.experiment --help, python -m src.failure --help và python -m src.occupancy --help liệt kê tham số, đơn vị, mặc định; chạy không tham số tạo kết quả trên data/kitti_mini. Pipeline obstacle dành cho **trục KITTI**, không áp nguyên ROI lên nuScenes; nuScenes trong bài này chỉ kiểm tra projection. Slide đi kèm đã export; source src/build_slides.mjs dùng bundled @oai/artifact-tool trong Codex và đọc chính các CSV này.
+
+Để dựng lại PPTX trong Codex trên máy hiện tại (PowerShell; chọn tên output mới):
+
+```powershell
+$env:SLIDES_OUTPUT = 'report/slides/TOPIC_D_REBUILT.pptx'
+& 'C:/Users/ADMIN/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' src/build_slides.mjs
+```
+
+Kiểm tra tái lập: agent đã clone source CP4 vào thư mục riêng, chạy lại kiểm tra projection/4 unit tests và cả 18 cấu hình × 20 lượt; mọi cột metric số học khớp chính xác CSV gốc khi bỏ cột latency. Không thay dữ liệu gốc trong data/ và chỉ REPORT.md được sửa trong các Markdown của đề bài.
 
 ## 6. Khai báo sử dụng AI
 

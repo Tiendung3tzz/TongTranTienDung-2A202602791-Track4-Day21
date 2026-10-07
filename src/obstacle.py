@@ -21,7 +21,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-from starter.datasets import load_points
+from starter.datasets import load_points, dataset_type
 
 
 @dataclass(frozen=True)
@@ -157,6 +157,8 @@ def main():
     ap.add_argument("--out", default="results/figures/obstacle_demo_000011.png", help="Output PNG")
     add_config_args(ap)
     args = ap.parse_args()
+    if dataset_type(args.data_root) != "kitti":
+        ap.error("Requires KITTI LiDAR axes (x forward, y left, z up)")
     cfg = config_from_args(args)
     result = run_pipeline(load_points(args.data_root, args.frame), cfg)
     save_demo(result, cfg, args.frame, args.out)

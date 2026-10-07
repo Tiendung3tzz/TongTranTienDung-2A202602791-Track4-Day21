@@ -9,7 +9,7 @@ from src.obstacle import Config, run_pipeline
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Polygon
-from starter.datasets import load_frame
+from starter.datasets import load_frame, dataset_type
 from src.evaluation import gt_support, corners_velo
 from src.experiment import write_csv
 
@@ -23,6 +23,8 @@ def main():
     ap.add_argument("--min-points", type=int, default=5, help="Fixed in both configs; 5 supports the sparse pedestrian")
     ap.add_argument("--out-dir", default="results", help="CSV, JSON and failure PNG directory")
     args = ap.parse_args()
+    if dataset_type(args.data_root) != "kitti":
+        ap.error("Requires KITTI LiDAR axes and labels")
     fr = load_frame(args.data_root, args.frame)
     configs = [Config(eps=args.baseline_eps, min_points=args.min_points), Config(eps=args.failure_eps, min_points=args.min_points)]
     results = [run_pipeline(fr["points"], c) for c in configs]

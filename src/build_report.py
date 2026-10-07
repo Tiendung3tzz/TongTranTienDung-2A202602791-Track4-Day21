@@ -105,6 +105,15 @@ python -m src.experiment{failure_cmd}{final_cmds}
 
 **[B4] Tool dùng lại:** python -m src.obstacle --help, python -m src.experiment --help, python -m src.failure --help và python -m src.occupancy --help liệt kê tham số, đơn vị, mặc định; chạy không tham số tạo kết quả trên data/kitti_mini. Pipeline obstacle dành cho **trục KITTI**, không áp nguyên ROI lên nuScenes; nuScenes trong bài này chỉ kiểm tra projection. Slide đi kèm đã export; source src/build_slides.mjs dùng bundled @oai/artifact-tool trong Codex và đọc chính các CSV này.
 
+Để dựng lại PPTX trong Codex trên máy hiện tại (PowerShell; chọn tên output mới):
+
+```powershell
+$env:SLIDES_OUTPUT = 'report/slides/TOPIC_D_REBUILT.pptx'
+& 'C:/Users/ADMIN/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' src/build_slides.mjs
+```
+
+Kiểm tra tái lập: agent đã clone source CP4 vào thư mục riêng, chạy lại kiểm tra projection/4 unit tests và cả 18 cấu hình × 20 lượt; mọi cột metric số học khớp chính xác CSV gốc khi bỏ cột latency. Không thay dữ liệu gốc trong data/ và chỉ REPORT.md được sửa trong các Markdown của đề bài.
+
 ## 6. Khai báo sử dụng AI
 
 | Công cụ / nguồn | Dùng cho việc gì | Đã kiểm chứng thế nào |
